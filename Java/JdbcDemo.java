@@ -1,0 +1,33 @@
+import java.sql.*;
+
+public class JdbcDemo {
+    public static void main(String[] args) {
+        String url = "jdbc:mysql://localhost:3306/studentdb";
+        String user = "root";
+        String password = "root";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection con = DriverManager.getConnection(url, user, password);
+
+            Statement st = con.createStatement();
+
+            ResultSet rs = st.executeQuery("SELECT * FROM students");
+
+            while (rs.next()) {
+                System.out.println(
+                        rs.getInt("id") + " " +
+                        rs.getString("name") + " " +
+                        rs.getInt("age")
+                );
+            }
+
+            rs.close();
+            st.close();
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+}
