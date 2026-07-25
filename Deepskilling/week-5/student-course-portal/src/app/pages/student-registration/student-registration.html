@@ -1,0 +1,50 @@
+<div style="max-width: 500px; margin: 2rem auto; padding: 2rem; border: 1px solid #ddd; border-radius: 8px; background: #fff;">
+  <h2>Student Course Registration</h2>
+  
+  <form [formGroup]="studentForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column; gap: 1rem;">
+    
+    <div>
+      <label>Full Name:</label><br>
+      <input type="text" formControlName="fullName" style="width: 100%; padding: 0.5rem; margin-top: 0.3rem;">
+      <div *ngIf="studentForm.get('fullName')?.invalid && studentForm.get('fullName')?.touched" style="color: red; font-size: 0.85rem;">
+        Name is required (minimum 3 characters).
+      </div>
+    </div>
+
+    <div>
+      <label>Email Address:</label><br>
+      <input type="email" formControlName="email" style="width: 100%; padding: 0.5rem; margin-top: 0.3rem;">
+      <div *ngIf="studentForm.get('email')?.invalid && studentForm.get('email')?.touched" style="color: red; font-size: 0.85rem;">
+        Please enter a valid email address.
+      </div>
+    </div>
+
+    <div>
+      <label>Course Code:</label><br>
+      <input type="text" formControlName="courseCode" style="width: 100%; padding: 0.5rem; margin-top: 0.3rem;">
+      <div *ngIf="studentForm.get('courseCode')?.invalid && studentForm.get('courseCode')?.touched" style="color: red; font-size: 0.85rem;">
+        Course code is required.
+      </div>
+    </div>
+
+    <div>
+      <label>Phone Number (10 digits):</label><br>
+      <input type="text" formControlName="phone" style="width: 100%; padding: 0.5rem; margin-top: 0.3rem;">
+      <div *ngIf="studentForm.get('phone')?.invalid && studentForm.get('phone')?.touched" style="color: red; font-size: 0.85rem;">
+        Enter a valid 10-digit phone number.
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="studentForm.invalid" style="padding: 0.7rem; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
+      Register Student
+    </button>
+  </form>
+
+  <div *ngIf="submittedData" style="margin-top: 2rem; padding: 1rem; background: #e8f5e9; border: 1px solid #c8e6c9; border-radius: 4px;">
+    <h3 style="color: #2e7d32; margin-top: 0;">Registration Successful!</h3>
+    <p><strong>Name:</strong> {{ submittedData.fullName }}</p>
+    <p><strong>Email:</strong> {{ submittedData.email }}</p>
+    <p><strong>Course Code:</strong> {{ submittedData.courseCode }}</p>
+    <p><strong>Phone:</strong> {{ submittedData.phone }}</p>
+  </div>
+</div>

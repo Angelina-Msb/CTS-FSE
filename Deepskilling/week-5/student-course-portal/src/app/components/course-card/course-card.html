@@ -1,0 +1,23 @@
+<div class="card" [ngClass]="cardClasses" [ngStyle]="borderStyle" appHighlight="lightblue">
+  <h3>{{ course.name }}</h3>
+  
+  <!-- Using the custom credit-label pipe -->
+  <p><strong>Code:</strong> {{ course.code }} | <strong>Credits:</strong> {{ course.credits | creditLabel }} | <strong>ID:</strong> {{ course.id }}</p>
+  
+  <p>
+    <strong>Status: </strong>
+    <span [ngSwitch]="course.gradeStatus">
+      <span *ngSwitchCase="'passed'" style="background: green; color: white; padding: 2px 8px; border-radius: 4px;">Passed</span>
+      <span *ngSwitchCase="'failed'" style="background: red; color: white; padding: 2px 8px; border-radius: 4px;">Failed</span>
+      <span *ngSwitchCase="'pending'" style="background: orange; color: white; padding: 2px 8px; border-radius: 4px;">Pending</span>
+    </span>
+  </p>
+
+  <!-- Expanded content section -->
+  <div *ngIf="isExpanded" style="margin: 0.5rem 0; font-size: 0.9rem; color: #555;">
+    <p><em>Additional course details: Lectures are held weekly with lab assignments required.</em></p>
+  </div>
+
+  <button (click)="toggleEnroll()">{{ isEnrolled ? 'Unenroll' : 'Enroll' }}</button>
+  <button (click)="toggleDetails()" style="margin-left: 0.5rem;">{{ isExpanded ? 'Hide Details' : 'Show Details' }}</button>
+</div>
