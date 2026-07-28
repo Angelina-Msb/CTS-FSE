@@ -1,0 +1,30 @@
+<div style="max-width: 600px; margin: 2rem auto; padding: 2rem; border: 1px solid #ddd; border-radius: 8px; background: #fff;">
+  <h2>Student Management Directory</h2>
+  
+  <div style="margin-bottom: 1.5rem;">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Search by student name..." style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+  </div>
+
+  <table *ngIf="students.length > 0; else noData" border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+    <thead>
+      <tr style="background: #f1f1f1;">
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Course Code</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of students | filter: searchTerm : 'fullName'">
+        <td>{{ s.fullName }}</td>
+        <td>{{ s.email }}</td>
+        <td>{{ s.courseCode }}</td>
+        <td>{{ s.phone }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noData>
+    <p style="color: #666; text-align: center;">No registered students found yet. Register a student using the Student Form!</p>
+  </ng-template>
+</div>
